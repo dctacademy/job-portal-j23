@@ -41,6 +41,18 @@ const registerValidationSchema = {
             options: [['candidate', 'recruiter']],
             errorMessage: 'role should be either candidate or recruiter'
         }
+    },
+    mobile: {
+        notEmpty: {
+            errorMessage: 'mobile is required'
+        },
+        isLength: {
+            options: { min: 10, max: 10},
+            errorMessage: 'mobile should be 10 digits'
+        },
+        isNumeric: {
+            errorMessage: 'mobile should be a number'
+        }
     }
 }
 
