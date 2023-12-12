@@ -31,11 +31,11 @@ usersCltr.login = async (req, res) => {
     }
     const body = _.pick(req.body, ['email', 'password']) 
     try {
-        const user = await User.findOne({ email: req.body.email })
+        const user = await User.findOne({ email: body.email })
         if(!user) {
             return res.status(404).json({ errors: 'invalid email / password '})
         }
-        const result = await bcryptjs.compare(req.body.password, user.password)  
+        const result = await bcryptjs.compare( body.password, user.password)  
         if(!result) {
             return res.status(404).json({ errors: 'invalid email / password '})
         }
