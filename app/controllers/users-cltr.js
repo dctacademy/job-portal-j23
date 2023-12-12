@@ -50,4 +50,13 @@ usersCltr.login = async (req, res) => {
     }
 }
 
+usersCltr.account = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id) 
+        res.json(user)
+    } catch(err) {
+        res.status(500).json(err)
+    }
+}   
+
 module.exports = usersCltr 

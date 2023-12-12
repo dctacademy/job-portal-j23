@@ -8,12 +8,14 @@ const usersCltr = require('./app/controllers/users-cltr')
 const { checkSchema } = require('express-validator')
 
 const { registerSchema, loginSchema} = require('./app/validations/user-validations')
+const { authenticateUser, authorizeUser} = require('./app/middlewares/auth')
 
 configureDB() 
 app.use(express.json())
 
 app.post('/api/users/register', checkSchema(registerSchema),  usersCltr.register)
 app.post('/api/users/login', checkSchema(loginSchema), usersCltr.login)
+app.get('/api/users/account', authenticateUser, usersCltr.account)
 
 
 app.listen(port, () => {
