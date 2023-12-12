@@ -17,10 +17,6 @@ usersCltr.register = async (req, res) => {
         const salt = await bcryptjs.genSalt() 
         const hashedPassword = await bcryptjs.hash(user.password, salt) 
         user.password = hashedPassword 
-        const usersCount = await User.countDocuments() 
-        if(usersCount == 0) {
-            user.role = 'admin' 
-        }
         await user.save() 
         res.status(201).json(user) 
     } catch(err){
