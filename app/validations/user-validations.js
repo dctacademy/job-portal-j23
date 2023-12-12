@@ -1,5 +1,15 @@
 const User = require('../models/user-model')
 
+const passwordSchema = {
+    notEmpty: {
+        errorMessage: 'password is required'
+    },
+    isLength: {
+        options: { min: 8, max: 128 },
+        errorMessage: 'password should be between 8 - 128 characters'
+    }
+}
+
 const registerValidationSchema = {
     username: {
         notEmpty: {
@@ -24,15 +34,7 @@ const registerValidationSchema = {
             }
         }
     },
-    password: {
-        notEmpty: {
-            errorMessage: 'password is required'
-        },
-        isLength: {
-            options: { min: 8, max: 128 },
-            errorMessage: 'password should be between 8 - 128 characters'
-        }
-    },
+    password: passwordSchema,
     role: {
         notEmpty: {
             errorMessage: 'role is required'
@@ -57,7 +59,15 @@ const registerValidationSchema = {
 }
 
 const loginValidationSchema = {
-
+    email: {
+        notEmpty: {
+            errorMessage: 'email is required'
+        },
+        isEmail : {
+            errorMessage: 'invalid email format'
+        }
+    },
+    password: passwordSchema
 }
 
 module.exports = {
